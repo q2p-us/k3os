@@ -160,10 +160,13 @@ install_grub()
 set default=0
 set timeout=10
 
-set gfxmode=auto
-set gfxpayload=keep
+set gfxmode=text
+set gfxpayload=text
 insmod all_video
 insmod gfxterm
+serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1
+terminal_input console serial
+terminal_output console serial
 
 menuentry "k3OS Current" {
   search.fs_label K3OS_STATE root
