@@ -234,7 +234,7 @@ get_iso()
     if [ -z "${ISO_DEVICE}" ]; then
         for i in $(lsblk -o NAME,TYPE -n | grep -w disk | awk '{print $1}'); do
             mkdir -p ${DISTRO}
-            if mount -o ro /dev/$i ${DISTRO}; then
+            if mount -o ro /dev/$i ${DISTRO} && [ -d "/${DISTRO}/k3os/" ]; then
                 ISO_DEVICE="/dev/$i"
                 umount ${DISTRO}
                 break
